@@ -4,8 +4,8 @@ services:
     build: .
     ports:
       - "8000:8000"
-    environment:
-      PYTHONUNBUFFERED: 1
+    env_file:
+      - ./.env
     depends_on: 
       - db
 
@@ -13,14 +13,12 @@ services:
     image: postgres
     container_name: fastapi-challenge-db
     environment:
-    - POSTGRES_DB=fastapi-challenge
+    - POSTGRES_DB=fastapi-challenge-db
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=password
+    - POSTGRES_PASSWORD=postgres
     ports:
       - 5432
     restart: always
-    env_file:
-      - ./.env
     volumes:
       - postgres-db:/var/lib/postgresql/data
 volumes:
