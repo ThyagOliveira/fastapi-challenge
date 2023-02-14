@@ -2,8 +2,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .api import device, location
+from . import models
+from .database import engine
 
 app = FastAPI()
+
+models.Base.metadata.create_all(engine)
 
 app.add_middleware(
     CORSMiddleware,
